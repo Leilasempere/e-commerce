@@ -1,13 +1,8 @@
-// middlewares/joiSchemaMiddleware.js
 import Joi from "joi";
 
-const password = Joi.string()
-    .min(8)
-    .max(20)
-
-    .messages({
-        "string.min": "Le mot de passe doit contenir au moins 8 et maximum 20 caractères.",
-        "string.empty": "Le mot de passe est requis.",
+const password = Joi.string().min(8).max(25).messages({
+    "string.min": "Le mot de passe doit contenir au moins 8 et maximum 25 caractères.",
+    "string.empty": "Le mot de passe est requis.",
 });
 
 export const registerSchema = Joi.object({
@@ -31,9 +26,25 @@ export const registerSchema = Joi.object({
         "any.only": "Les mots de passe ne correspondent pas.",
         "string.empty": "La confirmation du mot de passe est requise.",
         }),
-    role: Joi.string().valid("buyer", "seller", "admin").default("buyer"),
-    brandname: Joi.string().allow(null, ""),
-    logo_url: Joi.string().uri().allow(null, ""),
+    // IMPORTANT: à l'inscription on n'autorise que buyer | seller (pas admin)
+    role: Joi.string().valid("buyer", "seller").default("buyer"),
+
+    // seller uniquement : obligatoires
+    brandname: Joi.alternatives().conditional("role", {
+        is: "seller",
+        then: Joi.string().min(2).required().messages({
+        "any.required": "Le nom de marque est requis pour un vendeur.",
+        }),
+        otherwise: Joi.string().allow(null, ""),
+    }),
+    logo_url: Joi.alternatives().conditional("role", {
+        is: "seller",
+        then: Joi.string().uri().required().messages({
+        "any.required": "Le logo est requis pour un vendeur.",
+        "string.uri": "Le logo doit être une URL valide.",
+        }),
+        otherwise: Joi.string().uri().allow(null, ""),
+    }),
 });
 
 export const loginSchema = Joi.object({

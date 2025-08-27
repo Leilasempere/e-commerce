@@ -3,10 +3,10 @@ import { register, verifyEmail, login, logout, forgotPassword, resetPassword } f
 import { validate } from "../middlewares/joiValidationMiddleware.js";
 import { registerSchema, loginSchema, forgotSchema, resetSchema } from "../middlewares/joiSchemaMiddleware.js";
 import limiter from "../middlewares/limiterMiddleware.js";
-
+import { uploadLogo, setLogoUrlFromFile } from "../middlewares/cloudinaryLogoMiddleware.js";
 const router = Router();
 
-router.post("/register", limiter , validate(registerSchema), register);
+router.post("/register", limiter,  uploadLogo, setLogoUrlFromFile, validate(registerSchema), register);
 router.get("/verify/:token", verifyEmail);
 
 
