@@ -5,7 +5,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/authRoute.js";
 import userRoutes from "./routes/userRoute.js";
-import limiter from "./utils/limiter.js";
+import limiter from "./middlewares/limiterMiddleware.js";
 
 
 const app = express();
