@@ -9,6 +9,12 @@ import categoriesRoutes from './routes/categoryRoute.js'
 const app = express()
 const PORT = process.env.PORT || 5002;
 
+// Un Middleware pour parser les crops des requêtes HTTP au format JSON (comme body-parser)
+app.use(express.json());
+
+// Middleware pour parser les données de formulaire (application/x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
+
 
 // Routes d'accueil 
 

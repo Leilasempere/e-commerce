@@ -4,9 +4,9 @@ import * as Categories from '../models/categoryModel.js'
 // Créer une categorie 
 
 export async function addCategorie(req, res) {
-        const {nom} = req.body
+        const {name} = req.body
     try {
-        await Categories.createCategorie(nom)
+        await Categories.createCategorie(name)
         res.status(201).send('Catégorie créée avec succès')
     } catch (err) {
         console.error(err);
@@ -45,9 +45,9 @@ export async function getCategorieById(req, res) {
 
 export async function putCategorie(req, res) {
     const { id } = req.params
-    const { nom } = req.body
+    const { name } = req.body
     try {
-        await Categories.updateCategorie(id, nom)
+        await Categories.updateCategorie(id, name)
         res.status(201).send('Catégorie modifiée avec succès')
     } catch (err) {
         console.error(err);

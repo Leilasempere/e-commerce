@@ -1,11 +1,11 @@
-import db_sql from "../config/db";
+import db_sql from "../config/db.js";
 
 // Créer une categorie
 
-export const createCategorie = (nom) => {
+export const createCategorie = (name) => {
     return db_sql.query(
-      "INSERT INTO categories (nom) VALUES (?)",
-      [nom]
+      "INSERT INTO categories (name) VALUES (?)",
+      [name]
     );
   };
 
@@ -24,10 +24,10 @@ export const getAllCategories = () => {
 
 // Modifier une categorie 
 
-export const updateCategorie = (id, nom) => {
+export const updateCategorie = (id, name) => {
     return db_sql.query(
-      "UPDATE categories SET nom=?, WHERE id=?",
-      [nom,id]
+      "UPDATE categories SET name=? WHERE id=?",
+      [name,id]
     );
   };
 
