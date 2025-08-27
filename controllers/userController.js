@@ -1,3 +1,4 @@
+import db_sql from "../config/db.js";
 import { getUserById, getAllUsers, updateUserById, deleteUserById } from "../models/userModel.js";
 
 

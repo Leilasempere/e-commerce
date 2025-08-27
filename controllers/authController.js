@@ -1,13 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import {
-  createUser,
-  getUserByEmail,
-  getUserById,
-  setVerified,
-} from "../models/userModel.js";
-import { pool } from "../config/db.js";
+import { createUser, getUserByEmail, getUserById, setVerified} from "../models/userModel.js";
+import db_sql from "../config/db.js";
 import sendVerificationEmail from "../utils/mailer.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -117,6 +112,9 @@ export const login = async (req, res) => {
     }
 };
 
+export const logout = (_req, res) => {
+    res.json({ message: "Déconnexion réussie (supprimez le token côté client)." });
+  };
 
 export const forgotPassword = async (req, res) => {
     try {
