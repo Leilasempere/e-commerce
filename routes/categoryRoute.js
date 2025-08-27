@@ -5,13 +5,17 @@ const router = express.Router()
 
 //Ajouter
 router.post('/' , addCategorie)
+
 //Toutes les categories
 router.get('/' , listCategories)
-//Trouver categorie par son id
+
+//Trouve categorie par son id
 router.get('/:id', getCategorieById)
-//Modifier une categorie par son id 
+
+//Modifie une categorie par son id 
 router.put('/:id', putCategorie)
-//SUpprimer une categorie par son id
+
+//SUpprime une categorie par son id
 router.delete('/:id', deleteCategorie)
 
 export default router;

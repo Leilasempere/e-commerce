@@ -4,6 +4,8 @@ dotenv.config();
 
 // Liste des imports 
 import categoriesRoutes from './routes/categoryRoute.js'
+import productsRoutes from './routes/productRoute.js';
+import productImagesRoutes from './routes/productImagesRoute.js';
 
 
 const app = express()
@@ -21,6 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes API 
 app.use('/categories', categoriesRoutes);
+app.use('/produits', productsRoutes);
+app.use('/produit-images', productImagesRoutes);
+
 
 // Démarage du serveur 
 app.listen(PORT, () => {
