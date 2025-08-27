@@ -5,8 +5,8 @@
 
 -- Drop database if exists
 DROP DATABASE IF EXISTS ecommerce_db;
-CREATE DATABASE ecommerce_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE ecommerce_db;
+CREATE DATABASE leila_ecommerce_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE leila_ecommerce_db;
 
 -- =====================
 -- USERS // UTILISATEURS
@@ -110,7 +110,7 @@ CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
-    method ENUM('card', 'paypal', 'bank_transfer') NOT NULL,
+    method ENUM('card', 'paypal', 'stripe') NOT NULL,
     status ENUM('pending', 'success', 'failed', 'refunded') DEFAULT 'pending',
     transaction_id VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
